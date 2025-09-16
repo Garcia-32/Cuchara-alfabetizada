@@ -1,0 +1,71 @@
+// Clase Auto
+public class Auto {
+    private String tipo;
+    private double precio;
+
+    public Auto(String tipo, double precio) {
+        this.tipo = tipo;
+        this.precio = precio;
+    }
+
+    public String getTipo() {
+        return tipo;
+    }
+
+    public double getPrecio() {
+        return precio;
+    }
+}
+
+// Clase Conductor
+public class Conductor {
+    private Auto auto;
+    private int chocolatesComprados;
+
+    public Conductor(Auto auto, int chocolatesComprados) {
+        this.auto = auto;
+        this.chocolatesComprados = chocolatesComprados;
+    }
+
+    // Método para calcular el descuento basado en chocolates
+    public double calcularDescuento() {
+        if (chocolatesComprados >= 10) {
+            return 0.20; // 20% de descuento
+        } else if (chocolatesComprados >= 5) {
+            return 0.10; // 10% de descuento
+        } else if (chocolatesComprados >= 1) {
+            return 0.05; // 5% de descuento
+        } else {
+            return 0.0; // Sin descuento
+        }
+    }
+
+    // Método para calcular el precio final con descuento
+    public double calcularPrecioFinal() {
+        double descuento = calcularDescuento();
+        return auto.getPrecio() * (1 - descuento);
+    }
+
+    public void mostrarFactura() {
+        System.out.println("Tipo de auto: " + auto.getTipo());
+        System.out.println("Precio base: $" + auto.getPrecio());
+        System.out.println("Chocolates comprados: " + chocolatesComprados);
+        System.out.println("Descuento aplicado: " + (calcularDescuento() * 100) + "%");
+        System.out.println("Precio final a pagar: $" + calcularPrecioFinal());
+    }
+}
+
+// Clase principal para probar
+public class Main {
+    public static void main(String[] args) {
+        // Crear 4 tipos de autos con sus precios
+        Auto auto1 = new Auto("Sedán", 100.0);
+        Auto auto2 = new Auto("SUV", 150.0);
+        Auto auto3 = new Auto("Deportivo", 200.0);
+        Auto auto4 = new Auto("Camioneta", 180.0);
+
+        // Ejemplo: conductor con un SUV y 7 chocolates comprados
+        Conductor conductor = new Conductor(auto2, 7);
+        conductor.mostrarFactura();
+    }
+}
